@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="normalize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Virtual keyboard</title>
 </head>
+
 <body>
+    <header class="header section ">
+        <div class="container">
+            <h1 class="main-title">Virtual keyboard</h1>
+        </div>
+    </header>
+
+    <main class="main section">
+        <div class="container main__container">
+            <div class="keyboard-input__container">
+                <textarea name="field-text" placeholder="Enter some text" class="keyboard-input" cols="70"
+                    rows="4"></textarea>
+            </div>
+
+            <div class="keyboard">
+                <div class="keyboard__keys">
+                    <button type="button" class="keyboard__key">a</button>
+                    <button type="button" class="keyboard__key keyboard__key_wide">
+                        <i class="material-icons">backspace</i>
+                    </button>
+                    <button type="button" class="keyboard__key keyboard__key_extra-wide">
+                        <i class="material-icons">space_bar</i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer section">
+        <div class="container footer__container">
+            <div class="contacts__container">
+                <ul class="contacts">
+                    <li class="contacts__item"><a href="https://rs.school/" class="contacts__link">
+                            <img class="contacts__img contacts__img_rs" src="./assets/svg/rs_school.svg" width="100"
+                                height="100" alt="rs school logo"></a>
+                    </li>
+                    <li class="contacts__item contacts__item_year">
+                        <div class="icons icons_year">2022</div>
+                    </li>
+                    <li class="contacts__item">
+                        <a href="https://github.com/vpeacock" class="contacts__link">
+                            <div class="icons">
+                                <img class="contacts__img contacts__img_gh" src="./assets/images/githab_logo.png"
+                                    width="100" height="100" alt="github logo">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <script src="./index.js"></script>
 </body>
+
 </html>
