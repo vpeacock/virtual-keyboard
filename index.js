@@ -550,17 +550,18 @@ const KEYBOARD = {
 
   trigger(key) {
     if (key === 'Backspace') {
-      this.properties.value = this.properties.value.slice(
-        0,
-        this.properties.value.length - 1
-      );
+      this.properties.value = this.properties.value.slice(0, keyboardInput.selectionEnd - 1);
       keyboardInput.value = this.properties.value;
+      keyboardInput.selectionStart = keyboardInput.selectionStart;
+      keyboardInput.selectionEnd = keyboardInput.selectionEnd;
     } else if (key === 'Delete') {
-      this.properties.value = this.properties.value.slice(
-        1,
-        this.properties.value.length
-      );
-      keyboardInput.value = this.properties.value;
+      console.log(keyboardInput.selectionStart)
+      this.properties.value = Array.from(this.properties.value);
+      this.properties.value.splice(keyboardInput.selectionStart, 1);
+      this.properties.value = this.properties.value.join('')
+      keyboardInput.value =  this.properties.value;
+      keyboardInput.selectionStart = keyboardInput.selectionStart;
+      keyboardInput.selectionEnd = keyboardInput.selectionEnd;
     } else if (key === 'Enter') {
       this.properties.value = this.properties.value + '\n';
       keyboardInput.value = this.properties.value;
@@ -568,19 +569,20 @@ const KEYBOARD = {
       this.properties.value += key;
       keyboardInput.value = this.properties.value;
     } else if (key === 'Tab') {
-      this.properties.value += '    ';
+      this.properties.value = Array.from(this.properties.value);
+      this.properties.value.splice(keyboardInput.selectionStart, 0, '    ');
+      this.properties.value = this.properties.value.join('')
       keyboardInput.value = this.properties.value;
     } else if (key === 'ArrowRight') {
       keyboardInput.selectionStart = keyboardInput.selectionEnd =
-        keyboardInput.selectionEnd + 1;
+      keyboardInput.selectionEnd + 1;
     } else if (key === 'ArrowLeft') {
       keyboardInput.selectionStart = keyboardInput.selectionEnd =
         keyboardInput.selectionEnd - 1;
     } else if (key === 'ArrowUp') {
       keyboardInput.selectionStart = keyboardInput.selectionEnd = 0;
     } else if (key === 'ArrowDown') {
-      keyboardInput.selectionStart = keyboardInput.selectionEnd =
-        keyboardInput.selectionStart + keyboardInput.value.length;
+      keyboardInput.selectionStart = keyboardInput.selectionEnd = keyboardInput.selectionStart + keyboardInput.value.length;
     } else if (key === 'CapsLock') {
       this.toggleCapsLock();
     } else if (key === 'Shift') {
