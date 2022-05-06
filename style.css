@@ -1,63 +1,49 @@
 /* fonts start*/
-/* roboto-300 - latin */
+/* roboto-300 - latin_cyrillic */
 @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
     src: local(''),
-        url('./assets/fonts/roboto-v29-latin-300.woff2') format('woff2'),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url('./assets/fonts/roboto-v29-latin-300.woff') format('woff');
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* roboto-regular - latin */
-@font-face {
+         url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-regular - latin_cyrillic */
+  @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     src: local(''),
-        url('./assets/fonts/roboto-v29-latin-regular.woff2') format('woff2'),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url('./assets/fonts/roboto-v29-latin-regular.woff') format('woff');
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* roboto-500 - latin */
-@font-face {
+         url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-500 - latin_cyrillic */
+  @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     src: local(''),
-        url('./assets/fonts/roboto-v29-latin-500.woff2') format('woff2'),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url('./assets/fonts/roboto-v29-latin-500.woff') format('woff');
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* roboto-700 - latin */
-@font-face {
+         url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-700 - latin_cyrillic */
+  @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     src: local(''),
-        url('./assets/fonts/roboto-v29-latin-700.woff2') format('woff2'),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url('./assets/fonts/roboto-v29-latin-700.woff') format('woff');
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* roboto-900 - latin */
-@font-face {
+         url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-900 - latin_cyrillic */
+  @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 900;
     src: local(''),
-        url('./assets/fonts/roboto-v29-latin-900.woff2') format('woff2'),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url('./assets/fonts/roboto-v29-latin-900.woff') format('woff');
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+         url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
 
 /* fonts end*/
 * {
@@ -212,10 +198,9 @@ img {
 
 /* ? -----------  keyboard styles start ----------- */
 .keyboard {
-    width: 100%;
-    padding: 10px;
+    width: 67%;
+    padding: 15px 10px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    height: 100px;
     border-radius: 9px;
     background-color: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -230,7 +215,7 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 5px;
 }
@@ -261,10 +246,32 @@ img {
     position: relative;
 }
 
-.keyboard__key:active {
+
+.keyboard__key:hover {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 35px 35px 68px 0px rgba(214, 230, 250, 0.5), inset -3px -3px 16px 0px rgba(214, 230, 250, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+}
+
+.keyboard__key_activatable::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+}
+
+.keyboard__key_active, .keyboard__key:active {
     border-radius: 5px;
     background: linear-gradient(123deg, #B3B3B3 0%, #FFFFFF 72.29%);
     box-shadow: 8.94582px 5.80948px 21.3333px rgba(51, 51, 51, 0.485), inset -4.17472px -2.71109px 4.97778px #9F9F9F, inset 4.17472px 2.71109px 4.97778px #FFFFFF;
+}
+
+.keyboard__key_active::after {
+    background: #08ff00;
 }
 
 .keyboard__key_wide {
@@ -276,6 +283,8 @@ img {
     width: 36%;
     max-width: 500px;
 }
+
+
 
 /* ? ----------- keyboard styles end ----------- */
 
