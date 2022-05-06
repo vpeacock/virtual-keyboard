@@ -433,7 +433,6 @@ const ru = {
 };
 
 let tmpKeyboard = [];
-let flagShift = false;
 let flagCrlAlt = false;
 let flagCapsLock = false;
 let pressed = [];
@@ -530,7 +529,6 @@ const KEYBOARD = {
             pressed = [];
           } else if (key === 'Control' || key === 'Alt') {
             if (pressed.length === 1) {
-              console.log(pressed);
               pressed = [];
 
               this.changeLang();
@@ -595,11 +593,9 @@ const KEYBOARD = {
 
   toggleCapsLock() {
     if (this.properties.shift) {
-      flagShift = false;
       this.toggleShift();
     }
     document.querySelectorAll('.keyboard__key').forEach((button) => {
-      console.log(button.classList.contains('keyboard__key_active'));
       if (button.firstChild.textContent === keysIcons['CapsLock']) {
         if (!button.classList.contains('keyboard__key_active')) {
           this.properties.capsLock = true;
@@ -611,7 +607,6 @@ const KEYBOARD = {
               key.classList.add('keyboard__key_active');
             }
           });
-          console.log('CapsLock on');
         } else {
           this.properties.capsLock = false;
           this.elements.keysContainer.innerHTML = '';
@@ -622,7 +617,6 @@ const KEYBOARD = {
               key.classList.remove('keyboard__key_active');
             }
           });
-          console.log('CapsLock off');
         }
       }
     });
@@ -635,17 +629,13 @@ const KEYBOARD = {
     document.querySelectorAll('.keyboard__key').forEach((button) => {
       if (button.textContent === 'Shift') {
         if (!button.classList.contains('keyboard__key_active')) {
-          flagShift = true;
           this.properties.shift = true;
           this.elements.keysContainer.innerHTML = '';
           this.elements.keysContainer.appendChild(this.createKeys());
-          console.log('Shift on');
         } else {
-          flagShift = false;
           this.properties.shift = false;
           this.elements.keysContainer.innerHTML = '';
           this.elements.keysContainer.appendChild(this.createKeys());
-          console.log('Shift off');
         }
       }
     });
@@ -683,71 +673,93 @@ const KEYBOARD = {
 
 window.addEventListener('DOMContentLoaded', () => {
   KEYBOARD.init();
-  console.log('DOMContentLoaded');
 });
 
+let keyPressed = null;
+
 document.addEventListener('keydown', (e) => {
-  if (!keysSpecial.includes(e.key)) {
-    const keyBoardKeys = document.querySelectorAll('.keyboard__key');
+  if (e.key !== 'CapsLock') {
+    keyPressed = null;
 
-    keyBoardKeys.forEach((key) => {
-      if (key.textContent === e.key || (e.key === 'Control' && key.textContent === 'Ctrl')) {
-        key.classList.add('keyboard__key_active');
-      }
-    });
-    if (keysIcons.hasOwnProperty(e.key)) {
-      keyBoardKeys.forEach((key) => {
-        if (key.firstChild.textContent === keysIcons[e.key]) {
-          key.classList.add('keyboard__key_active');
+    if (!KEYBOARD.elements.keys.includes(e.key)) {
+      let arr = null;
+      let indexElem = null;
+
+      for (let lay in en) {
+        arr = [].concat(...en[lay]);
+        if (arr.includes(e.key)) {
+          indexElem = arr.indexOf(e.key);
+          keyPressed = KEYBOARD.elements.keys[indexElem];
         }
-      });
+      }
+
+      if (!keyPressed) {
+        for (let lay in ru) {
+          arr = [].concat(...ru[lay]);
+          if (arr.includes(e.key)) {
+            indexElem = arr.indexOf(e.key);
+            keyPressed = KEYBOARD.elements.keys[indexElem];
+          }
+        }
+      }
+    } else {
+      keyPressed = e.key;
     }
 
-    if (KEYBOARD.elements.keys.includes(e.key)) {
-      if (e.altKey && e.ctrlKey && !flagCrlAlt && !e.shiftKey) {
-        flagCrlAlt = true;
-        KEYBOARD.changeLang();
-        console.log('alt & ctrl');
-      } else if(e.key !== 'Control' && e.key !== 'Alt') {
-        KEYBOARD.trigger(e.key);
-      }
-    }
-  } else {
-    if (e.shiftKey && !flagShift && !e.altKey && !e.ctrlKey) {
-      flagShift = true;
-      KEYBOARD.trigger(e.key);
+    if (KEYBOARD.elements.keys.includes(keyPressed)) {
+      if (!keysSpecial.includes(keyPressed)) {
+        const keyBoardKeys = document.querySelectorAll('.keyboard__key');
+
+        keyBoardKeys.forEach((key) => {
+          if (
+            key.textContent === keyPressed ||
+            (keyPressed === 'Control' && key.textContent === 'Ctrl')
+          ) {
+            key.classList.add('keyboard__key_active');
+          }
+        });
+        if (keysIcons.hasOwnProperty(keyPressed)) {
+          keyBoardKeys.forEach((key) => {
+            if (key.firstChild.textContent === keysIcons[keyPressed]) {
+              key.classList.add('keyboard__key_active');
+            }
+          });
+        }
+
+        if (e.altKey && e.ctrlKey && !flagCrlAlt && !e.shiftKey) {
+          flagCrlAlt = true;
+          KEYBOARD.changeLang();
+        } else if (keyPressed !== 'Control' && keyPressed !== 'Alt') {
+          KEYBOARD.trigger(keyPressed);
+        }
+      } 
     }
   }
   e.preventDefault();
 });
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === 'CapsLock' && !e.shiftKey) {
-    KEYBOARD.toggleCapsLock();
-  } else {
-    const keyBoardKeys = document.querySelectorAll('.keyboard__key');
+  if (e.key !== 'CapsLock') {
+    if (KEYBOARD.elements.keys.includes(keyPressed)) {
+      const keyBoardKeys = document.querySelectorAll('.keyboard__key');
 
-    flagCrlAlt = false;
+      flagCrlAlt = false;
 
-    if (!e.shiftKey && flagShift && e.key === 'Shift') {
-      flagShift = false;
-      KEYBOARD.trigger(e.key);
-    }
+      if (keyPressed === 'Shift') {
+        KEYBOARD.trigger(keyPressed);
+      }
 
-    if (KEYBOARD.elements.keys.includes(e.key)) {
       keyBoardKeys.forEach((key) => {
         key.classList.remove('keyboard__key_active');
+          if(key.textContent ==='Shift' && KEYBOARD.properties.shift){
+            key.classList.add('keyboard__key_active');
+          }else if(key.firstChild.textContent === keysIcons['CapsLock']&& KEYBOARD.properties.capsLock){
+            key.classList.add('keyboard__key_active');
+          }
       });
     }
+  } else if(e.key === 'CapsLock' && !e.shiftKey) {
+    KEYBOARD.toggleCapsLock();
   }
-
   e.preventDefault();
-});
-
-document.addEventListener('keypress', (e) => {
-  if (!KEYBOARD.elements.keys.includes(e.key)) {
-    e.preventDefault();
-  } else if (e.key === ' ') {
-    e.preventDefault();
-  }
 });
