@@ -432,10 +432,9 @@ const ru = {
   ],
 };
 
-let tmpKeyboard = [];
 let flagCrlAlt = false;
-let flagCapsLock = false;
 let pressed = [];
+const langLocal = localStorage.getItem('lang');
 
 const KEYBOARD = {
   elements: {
@@ -446,24 +445,23 @@ const KEYBOARD = {
     keyboardLayout: '',
   },
 
-  // сведения о текущем состоянии клавиатуры
   properties: {
-    value: '', //текущее значение клавиатуры
-    capsLock: false, // находится ли клавиатура в режиме caps lock
+    value: '',
+    capsLock: false,
     shift: false,
     lang: 'en',
   },
 
   init() {
-    // создаются основные элементы
+    if (langLocal) {
+      this.properties.lang = langLocal;
+    }
     this.elements.main = document.createElement('div');
     this.elements.keysContainer = document.createElement('div');
 
     this.elements.main.classList.add('keyboard');
     this.elements.keysContainer.classList.add('keyboard__keys');
     this.elements.keysContainer.appendChild(this.createKeys());
-
-    // Добавление  в DOM
 
     this.elements.main.appendChild(this.elements.keysContainer);
     document.querySelector('.main__container').appendChild(this.elements.main);
@@ -472,9 +470,7 @@ const KEYBOARD = {
   createKeys() {
     const fragment = document.createDocumentFragment();
 
-    //Создание иконок для кнопки
-    const createIconHTML = (icon_name) =>
-      `<i class="material-icons">${icon_name}</i>`;
+    const createIconHTML = (iconName) => `<i class="material-icons">${iconName}</i>`;
 
     this.elements.keys = [];
 
@@ -509,7 +505,7 @@ const KEYBOARD = {
           keyElement.classList.add('keyboard__key_activatable');
         }
 
-        if (keysIcons.hasOwnProperty(key)) {
+        if (key in keysIcons) {
           keyElement.innerHTML = createIconHTML(keysIcons[key]);
         } else {
           keyElement.textContent = key;
@@ -520,12 +516,7 @@ const KEYBOARD = {
 
         keyElement.addEventListener('click', () => {
           keyboardInput.focus();
-          if (
-            pressed.length > 0 &&
-            pressed.length === 0 &&
-            key !== 'Control' &&
-            key !== 'Alt'
-          ) {
+          if (pressed.length > 0 && pressed.length === 0 && key !== 'Control' && key !== 'Alt') {
             pressed = [];
           } else if (key === 'Control' || key === 'Alt') {
             if (pressed.length === 1) {
@@ -552,18 +543,13 @@ const KEYBOARD = {
     if (key === 'Backspace') {
       this.properties.value = this.properties.value.slice(0, keyboardInput.selectionEnd - 1);
       keyboardInput.value = this.properties.value;
-      keyboardInput.selectionStart = keyboardInput.selectionStart;
-      keyboardInput.selectionEnd = keyboardInput.selectionEnd;
     } else if (key === 'Delete') {
-      console.log(keyboardInput.selectionStart)
       this.properties.value = Array.from(this.properties.value);
       this.properties.value.splice(keyboardInput.selectionStart, 1);
-      this.properties.value = this.properties.value.join('')
-      keyboardInput.value =  this.properties.value;
-      keyboardInput.selectionStart = keyboardInput.selectionStart;
-      keyboardInput.selectionEnd = keyboardInput.selectionEnd;
+      this.properties.value = this.properties.value.join('');
+      keyboardInput.value = this.properties.value;
     } else if (key === 'Enter') {
-      this.properties.value = this.properties.value + '\n';
+      this.properties.value += '\n';
       keyboardInput.value = this.properties.value;
     } else if (key === ' ') {
       this.properties.value += key;
@@ -571,18 +557,20 @@ const KEYBOARD = {
     } else if (key === 'Tab') {
       this.properties.value = Array.from(this.properties.value);
       this.properties.value.splice(keyboardInput.selectionStart, 0, '    ');
-      this.properties.value = this.properties.value.join('')
+      this.properties.value = this.properties.value.join('');
       keyboardInput.value = this.properties.value;
     } else if (key === 'ArrowRight') {
-      keyboardInput.selectionStart = keyboardInput.selectionEnd =
-      keyboardInput.selectionEnd + 1;
+      keyboardInput.selectionEnd += 1;
+      keyboardInput.selectionStart = keyboardInput.selectionEnd;
     } else if (key === 'ArrowLeft') {
-      keyboardInput.selectionStart = keyboardInput.selectionEnd =
-        keyboardInput.selectionEnd - 1;
+      keyboardInput.selectionEnd -= 1;
+      keyboardInput.selectionStart = keyboardInput.selectionEnd;
     } else if (key === 'ArrowUp') {
-      keyboardInput.selectionStart = keyboardInput.selectionEnd = 0;
+      keyboardInput.selectionStart = 0;
+      keyboardInput.selectionEnd = 0;
     } else if (key === 'ArrowDown') {
-      keyboardInput.selectionStart = keyboardInput.selectionEnd = keyboardInput.selectionStart + keyboardInput.value.length;
+      keyboardInput.selectionStart += keyboardInput.value.length;
+      keyboardInput.selectionEnd = keyboardInput.selectionStart;
     } else if (key === 'CapsLock') {
       this.toggleCapsLock();
     } else if (key === 'Shift') {
@@ -598,14 +586,14 @@ const KEYBOARD = {
       this.toggleShift();
     }
     document.querySelectorAll('.keyboard__key').forEach((button) => {
-      if (button.firstChild.textContent === keysIcons['CapsLock']) {
+      if (button.firstChild.textContent === keysIcons.CapsLock) {
         if (!button.classList.contains('keyboard__key_active')) {
           this.properties.capsLock = true;
           this.elements.keysContainer.innerHTML = '';
           this.elements.keysContainer.appendChild(this.createKeys());
           const keyBoardKeys = document.querySelectorAll('.keyboard__key');
           keyBoardKeys.forEach((key) => {
-            if (key.firstChild.textContent === keysIcons['CapsLock']) {
+            if (key.firstChild.textContent === keysIcons.CapsLock) {
               key.classList.add('keyboard__key_active');
             }
           });
@@ -615,7 +603,7 @@ const KEYBOARD = {
           this.elements.keysContainer.appendChild(this.createKeys());
           const keyBoardKeys = document.querySelectorAll('.keyboard__key');
           keyBoardKeys.forEach((key) => {
-            if (key.firstChild.textContent === keysIcons['CapsLock']) {
+            if (key.firstChild.textContent === keysIcons.CapsLock) {
               key.classList.remove('keyboard__key_active');
             }
           });
@@ -667,7 +655,7 @@ const KEYBOARD = {
     } else {
       this.properties.lang = 'en';
     }
-
+    localStorage.setItem('lang', this.properties.lang);
     this.elements.keysContainer.innerHTML = '';
     this.elements.keysContainer.appendChild(this.createKeys());
   },
@@ -684,25 +672,27 @@ document.addEventListener('keydown', (e) => {
     keyPressed = null;
 
     if (!KEYBOARD.elements.keys.includes(e.key)) {
-      let arr = null;
+      let arraysObject = Object.values(en);
       let indexElem = null;
+      let arrTmp = null;
 
-      for (let lay in en) {
-        arr = [].concat(...en[lay]);
-        if (arr.includes(e.key)) {
-          indexElem = arr.indexOf(e.key);
+      arraysObject.forEach((arr) => {
+        arrTmp = [].concat(...arr);
+        if (arrTmp.includes(e.key)) {
+          indexElem = arrTmp.indexOf(e.key);
           keyPressed = KEYBOARD.elements.keys[indexElem];
         }
-      }
+      });
 
       if (!keyPressed) {
-        for (let lay in ru) {
-          arr = [].concat(...ru[lay]);
-          if (arr.includes(e.key)) {
-            indexElem = arr.indexOf(e.key);
+        arraysObject = Object.values(ru);
+        arraysObject.forEach((arr) => {
+          arrTmp = [].concat(...arr);
+          if (arrTmp.includes(e.key)) {
+            indexElem = arrTmp.indexOf(e.key);
             keyPressed = KEYBOARD.elements.keys[indexElem];
           }
-        }
+        });
       }
     } else {
       keyPressed = e.key;
@@ -713,14 +703,11 @@ document.addEventListener('keydown', (e) => {
         const keyBoardKeys = document.querySelectorAll('.keyboard__key');
 
         keyBoardKeys.forEach((key) => {
-          if (
-            key.textContent === keyPressed ||
-            (keyPressed === 'Control' && key.textContent === 'Ctrl')
-          ) {
+          if (key.textContent === keyPressed || (keyPressed === 'Control' && key.textContent === 'Ctrl')) {
             key.classList.add('keyboard__key_active');
           }
         });
-        if (keysIcons.hasOwnProperty(keyPressed)) {
+        if (keyPressed in keysIcons) {
           keyBoardKeys.forEach((key) => {
             if (key.firstChild.textContent === keysIcons[keyPressed]) {
               key.classList.add('keyboard__key_active');
@@ -734,7 +721,7 @@ document.addEventListener('keydown', (e) => {
         } else if (keyPressed !== 'Control' && keyPressed !== 'Alt') {
           KEYBOARD.trigger(keyPressed);
         }
-      } 
+      }
     }
   }
   e.preventDefault();
@@ -753,14 +740,16 @@ document.addEventListener('keyup', (e) => {
 
       keyBoardKeys.forEach((key) => {
         key.classList.remove('keyboard__key_active');
-          if(key.textContent ==='Shift' && KEYBOARD.properties.shift){
-            key.classList.add('keyboard__key_active');
-          }else if(key.firstChild.textContent === keysIcons['CapsLock']&& KEYBOARD.properties.capsLock){
-            key.classList.add('keyboard__key_active');
-          }
+        if (key.textContent === 'Shift' && KEYBOARD.properties.shift) {
+          key.classList.add('keyboard__key_active');
+        } else if (
+          key.firstChild.textContent === keysIcons.CapsLock && KEYBOARD.properties.capsLock
+        ) {
+          key.classList.add('keyboard__key_active');
+        }
       });
     }
-  } else if(e.key === 'CapsLock' && !e.shiftKey) {
+  } else if (e.key === 'CapsLock' && !e.shiftKey) {
     KEYBOARD.toggleCapsLock();
   }
   e.preventDefault();
