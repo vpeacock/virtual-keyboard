@@ -5,45 +5,59 @@
     font-style: normal;
     font-weight: 300;
     src: local(''),
-         url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-regular - latin_cyrillic */
-  @font-face {
+        url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-regular - latin_cyrillic */
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     src: local(''),
-         url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-500 - latin_cyrillic */
-  @font-face {
+        url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-500 - latin_cyrillic */
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     src: local(''),
-         url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-700 - latin_cyrillic */
-  @font-face {
+        url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-700 - latin_cyrillic */
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     src: local(''),
-         url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-900 - latin_cyrillic */
-  @font-face {
+        url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-900 - latin_cyrillic */
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 900;
     src: local(''),
-         url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+        url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 
 /* fonts end*/
 * {
@@ -94,8 +108,8 @@ img {
 /* *-------------------------- general styles start--------------------------*/
 
 :root {
-    --yellow: #ffd541;
-    --btn-light-hover: #004e99;
+    --yellow: #ffb100;
+    --btn-light-hover: #cc3190;
     --white: #FFFFFF;
 
 }
@@ -121,16 +135,57 @@ img {
     background-image: url('./assets/images/footer-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 40%;
+    background-position: 50% 70%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
+}
+
+.header__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 110%;
+    text-align: center;
+    color: var(--white);
+}
+
+.current-lang {
+    color: #fca900;
+    font-size: 24px;
+}
+
+.info {
+    color: #fca900;
+    font-size: 24px;
+}
+
+.current-lang::before {
+    content: "'";
+    margin-right: 3px;
+}
+
+.current-lang::after {
+    content: "'";
+    margin-left: 3px;
 }
 
 .main-title {
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 60px;
     text-align: center;
-    color: var(--white);
+    color: #fca900;
 }
 
 /* *-------------------------- header styles end--------------------------*/
@@ -142,6 +197,10 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 40%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
 }
 
 .main__container {
@@ -179,6 +238,15 @@ img {
     background: linear-gradient(180deg, #E3E3E3 0%, #FFFFFF 100%);
     box-shadow: 6.53145e-16px 10.6667px 21.3333px rgba(51, 51, 51, 0.1525), inset -1.66915e-16px -2.72593px 2.72593px #DCDCDC, inset 1.66915e-16px 2.72593px 2.72593px #FFFFFF;
 
+}
+
+.keyboard-input::placeholder {
+    color: #0b0526;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 38px;
 }
 
 .keyboard-input::-webkit-scrollbar {
@@ -321,7 +389,11 @@ img {
     background-image: url('./assets/images/footer-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 40%;
+    background-position: 80% 10%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
 }
 
 .icons_year {
@@ -412,6 +484,7 @@ img {
 
 .contacts__img_rs:hover {
     background-color: var(--yellow);
+    box-shadow: 1.11497px 10.6082px 21.3333px rgba(51, 51, 51, 0.793), inset -0.738358px -7.02501px 7.0637px #f79822, inset 0.738358px 7.02501px 7.0637px #f79822;
 }
 
 .contacts__img_gh {

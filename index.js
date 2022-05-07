@@ -1,7 +1,10 @@
 const BODY = document.querySelector('body');
 const pageContent = `  <header class="header section ">
-<div class="container">
+<div class="container header__container">
     <h1 class="main-title">Virtual keyboard</h1>
+    <p class="header__text">Данная клавиатура создана в операционной системе <span class="info">Windows</span></p>
+    <p class="header__text">Для переключения языка используйте сочетание клавиш <span class="info">Ctrl + Alt</span></p>
+    <p class="header__text">Текущий язык раскладки клавиатуры: <span class="current-lang"></span></p>
 </div>
 </header>
 
@@ -9,7 +12,7 @@ const pageContent = `  <header class="header section ">
 <div class="container main__container">
     <div class="keyboard-input__container">
         <textarea name="field-text" placeholder="Enter some text" class="keyboard-input" cols="70"
-            rows="4" autofocus></textarea>
+            rows="5" autofocus></textarea>
     </div>
 </div>
 </main>
@@ -39,6 +42,7 @@ const pageContent = `  <header class="header section ">
 </footer>`;
 
 BODY.insertAdjacentHTML('beforeend', pageContent);
+const langText = document.querySelector('.current-lang');
 
 const keyboardInput = document.querySelector('.keyboard-input');
 
@@ -456,6 +460,7 @@ const KEYBOARD = {
     if (langLocal) {
       this.properties.lang = langLocal;
     }
+    langText.textContent = this.properties.lang;
     this.elements.main = document.createElement('div');
     this.elements.keysContainer = document.createElement('div');
 
@@ -468,7 +473,7 @@ const KEYBOARD = {
   },
 
   createKeys() {
-    const fragment = document.createDocumentFragment();
+    const templateKeyboard = document.createDocumentFragment();
 
     const createIconHTML = (iconName) => `<i class="material-icons">${iconName}</i>`;
 
@@ -522,24 +527,24 @@ const KEYBOARD = {
             if (pressed.length === 1) {
               pressed = [];
 
-              this.changeLang();
+              this.changeLanguage();
             } else {
               pressed.push(key);
             }
           } else {
-            this.trigger(key);
+            this.action(key);
           }
         });
 
-        fragment.appendChild(keyElement);
+        templateKeyboard.appendChild(keyElement);
       });
-      fragment.appendChild(document.createElement('br'));
+      templateKeyboard.appendChild(document.createElement('br'));
     });
 
-    return fragment;
+    return templateKeyboard;
   },
 
-  trigger(key) {
+  action(key) {
     if (key === 'Backspace') {
       this.properties.value = this.properties.value.slice(0, keyboardInput.selectionEnd - 1);
       keyboardInput.value = this.properties.value;
@@ -641,7 +646,7 @@ const KEYBOARD = {
     });
   },
 
-  changeLang() {
+  changeLanguage() {
     if (this.properties.capsLock) {
       this.toggleCapsLock();
     }
@@ -656,6 +661,7 @@ const KEYBOARD = {
       this.properties.lang = 'en';
     }
     localStorage.setItem('lang', this.properties.lang);
+    langText.textContent = this.properties.lang;
     this.elements.keysContainer.innerHTML = '';
     this.elements.keysContainer.appendChild(this.createKeys());
   },
@@ -717,9 +723,9 @@ document.addEventListener('keydown', (e) => {
 
         if (e.altKey && e.ctrlKey && !flagCrlAlt && !e.shiftKey) {
           flagCrlAlt = true;
-          KEYBOARD.changeLang();
+          KEYBOARD.changeLanguage();
         } else if (keyPressed !== 'Control' && keyPressed !== 'Alt') {
-          KEYBOARD.trigger(keyPressed);
+          KEYBOARD.action(keyPressed);
         }
       }
     }
@@ -735,7 +741,7 @@ document.addEventListener('keyup', (e) => {
       flagCrlAlt = false;
 
       if (keyPressed === 'Shift') {
-        KEYBOARD.trigger(keyPressed);
+        KEYBOARD.action(keyPressed);
       }
 
       keyBoardKeys.forEach((key) => {
