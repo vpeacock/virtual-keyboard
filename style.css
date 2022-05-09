@@ -1,0 +1,498 @@
+/* fonts start*/
+/* roboto-300 - latin_cyrillic */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local(''),
+        url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-300.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-regular - latin_cyrillic */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-regular.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-500 - latin_cyrillic */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local(''),
+        url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-500.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-700 - latin_cyrillic */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+        url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-700.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-900 - latin_cyrillic */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+        url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('./assets/fonts/roboto-v29-latin_cyrillic-900.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* fonts end*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 75%;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+button {
+    cursor: pointer;
+}
+
+li {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+img {
+    max-inline-size: 100%;
+    block-size: auto;
+    height: auto;
+}
+
+/* *-------------------------- general styles start--------------------------*/
+
+:root {
+    --yellow: #ffb100;
+    --btn-light-hover: #cc3190;
+    --white: #FFFFFF;
+
+}
+
+.container {
+    max-width: 1440px;
+    padding: 0 20px;
+    box-sizing: content-box;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 20px 0;
+}
+
+
+/* *-------------------------- general styles end--------------------------*/
+
+
+/* *-------------------------- header styles start--------------------------*/
+
+.header {
+    background-image: url('./assets/images/footer-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 70%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
+}
+
+.header__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 110%;
+    text-align: center;
+    color: var(--white);
+}
+
+.current-lang {
+    color: #fca900;
+    font-size: 24px;
+}
+
+.info {
+    color: #fca900;
+    font-size: 24px;
+}
+
+.current-lang::before {
+    content: "'";
+    margin-right: 3px;
+}
+
+.current-lang::after {
+    content: "'";
+    margin-left: 3px;
+}
+
+.main-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 60px;
+    text-align: center;
+    color: #fca900;
+}
+
+/* *-------------------------- header styles end--------------------------*/
+
+
+/* *-------------------------- main styles start--------------------------*/
+.main {
+    background-image: url('./assets/images/main-bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 40%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
+}
+
+.main__container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboard-input__container {
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px 3px;
+    padding: 30px;
+
+}
+
+.keyboard-input {
+    resize: none;
+    padding: 10px;
+    width: 100%;
+    scrollbar-color: #930dc0 #1774c6;
+    scrollbar-width: auto;
+    outline: none;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    border: none;
+    background: linear-gradient(180deg, #E3E3E3 0%, #FFFFFF 100%);
+    box-shadow: 6.53145e-16px 10.6667px 21.3333px rgba(51, 51, 51, 0.1525), inset -1.66915e-16px -2.72593px 2.72593px #DCDCDC, inset 1.66915e-16px 2.72593px 2.72593px #FFFFFF;
+
+}
+
+.keyboard-input::placeholder {
+    color: #0b0526;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 38px;
+}
+
+.keyboard-input::-webkit-scrollbar {
+    width: 0.4em;
+    height: 0.4em;
+    background-color: var(--btn-light-hover);
+}
+
+.keyboard-input::-webkit-scrollbar-track {
+    background: var(--btn-light-hover);
+}
+
+.keyboard-input::-webkit-scrollbar-thumb {
+    background: #d0e9ff;
+    border-radius: 10%;
+}
+
+/* ? -----------  keyboard styles start ----------- */
+.keyboard {
+    width: 67%;
+    padding: 15px 10px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    border-radius: 9px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+}
+
+.keyboard__keys {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.keyboard__key {
+    height: 50px;
+    width: 6%;
+    max-width: 50px;
+    margin: 3px;
+    outline: none;
+    border: none;
+
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 1.11497px 10.6082px 21.3333px rgba(51, 51, 51, 0.793), inset -0.738358px -7.02501px 7.0637px #C6C6C6, inset 0.738358px 7.02501px 7.0637px #FFFFFF;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 38px;
+    display: grid;
+    place-items: center;
+    place-content: center;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+
+
+.keyboard__key:hover {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 35px 35px 68px 0px rgba(214, 230, 250, 0.5), inset -3px -3px 16px 0px rgba(214, 230, 250, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+}
+
+.keyboard__key_activatable::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+}
+
+.keyboard__key_active, .keyboard__key:active {
+    border-radius: 5px;
+    background: linear-gradient(123deg, #B3B3B3 0%, #FFFFFF 72.29%);
+    box-shadow: 8.94582px 5.80948px 21.3333px rgba(51, 51, 51, 0.485), inset -4.17472px -2.71109px 4.97778px #9F9F9F, inset 4.17472px 2.71109px 4.97778px #FFFFFF;
+}
+
+.keyboard__key_active::after {
+    background: #08ff00;
+}
+
+.keyboard__key_wide {
+    width: 12%;
+    max-width: 100px;
+}
+
+.keyboard__key_extra-wide {
+    width: 36%;
+    max-width: 500px;
+}
+
+
+
+/* ? ----------- keyboard styles end ----------- */
+
+
+/* *-------------------------- main styles end--------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *--------------------------footer styles start--------------------------*/
+
+.contacts__container {
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px 3px;
+    padding: 20px;
+}
+
+.footer {
+
+    background-image: url('./assets/images/footer-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 80% 10%;
+
+    box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 1px 2px 20px 12px rgba(0, 0, 0, 0.68)
+}
+
+.icons_year {
+    color: var(--white);
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 122%;
+
+}
+
+
+.contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contacts__item {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 126%;
+}
+
+.contacts__img {
+    height: auto;
+    object-fit: cover;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.icons {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.icons::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--btn-light-hover);
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(100%, 100%);
+    transition: all .4s;
+}
+
+.icons:hover::before {
+    transform: translate(0);
+    animation: anim .4s linear;
+}
+
+@keyframes anim {
+    0%, 100% {
+        width: 100%;
+        height: 100%;
+    }
+
+    50% {
+        width: 50%;
+        height: 50%;
+    }
+}
+
+
+.contacts__img_rs {
+    max-width: 100px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 1.11497px 10.6082px 21.3333px rgba(51, 51, 51, 0.793), inset -0.738358px -7.02501px 7.0637px #C6C6C6, inset 0.738358px 7.02501px 7.0637px #FFFFFF;
+    transition: .5s;
+}
+
+.contacts__img_rs:hover {
+    background-color: var(--yellow);
+    box-shadow: 1.11497px 10.6082px 21.3333px rgba(51, 51, 51, 0.793), inset -0.738358px -7.02501px 7.0637px #f79822, inset 0.738358px 7.02501px 7.0637px #f79822;
+}
+
+.contacts__img_gh {
+    max-width: 120px;
+}
+
+.hide {
+    display: none;
+}
+
+/* *--------------------------footer styles end--------------------------*/
