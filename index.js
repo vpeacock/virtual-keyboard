@@ -545,44 +545,56 @@ const KEYBOARD = {
   },
 
   action(key) {
-    if (key === 'Backspace') {
-      this.properties.value = this.properties.value.slice(0, keyboardInput.selectionEnd - 1);
-      keyboardInput.value = this.properties.value;
-    } else if (key === 'Delete') {
-      this.properties.value = Array.from(this.properties.value);
-      this.properties.value.splice(keyboardInput.selectionStart, 1);
-      this.properties.value = this.properties.value.join('');
-      keyboardInput.value = this.properties.value;
-    } else if (key === 'Enter') {
-      this.properties.value += '\n';
-      keyboardInput.value = this.properties.value;
-    } else if (key === ' ') {
-      this.properties.value += key;
-      keyboardInput.value = this.properties.value;
-    } else if (key === 'Tab') {
-      this.properties.value = Array.from(this.properties.value);
-      this.properties.value.splice(keyboardInput.selectionStart, 0, '    ');
-      this.properties.value = this.properties.value.join('');
-      keyboardInput.value = this.properties.value;
-    } else if (key === 'ArrowRight') {
-      keyboardInput.selectionEnd += 1;
-      keyboardInput.selectionStart = keyboardInput.selectionEnd;
-    } else if (key === 'ArrowLeft') {
-      keyboardInput.selectionEnd -= 1;
-      keyboardInput.selectionStart = keyboardInput.selectionEnd;
-    } else if (key === 'ArrowUp') {
-      keyboardInput.selectionStart = 0;
-      keyboardInput.selectionEnd = 0;
-    } else if (key === 'ArrowDown') {
-      keyboardInput.selectionStart += keyboardInput.value.length;
-      keyboardInput.selectionEnd = keyboardInput.selectionStart;
-    } else if (key === 'CapsLock') {
-      this.toggleCapsLock();
-    } else if (key === 'Shift') {
-      this.toggleShift();
-    } else {
-      this.properties.value += key;
-      keyboardInput.value = this.properties.value;
+    switch (key) {
+      case 'Backspace':
+        this.properties.value = this.properties.value.slice(0, keyboardInput.selectionEnd - 1);
+        keyboardInput.value = this.properties.value;
+        break;
+      case 'Delete':
+        this.properties.value = Array.from(this.properties.value);
+        this.properties.value.splice(keyboardInput.selectionStart, 1);
+        this.properties.value = this.properties.value.join('');
+        keyboardInput.value = this.properties.value;
+        break;
+      case 'Enter':
+        this.properties.value += '\n';
+        keyboardInput.value = this.properties.value;
+        break;
+      case ' ':
+        this.properties.value += key;
+        keyboardInput.value = this.properties.value;
+        break;
+      case 'Tab':
+        this.properties.value = Array.from(this.properties.value);
+        this.properties.value.splice(keyboardInput.selectionStart, 0, '    ');
+        this.properties.value = this.properties.value.join('');
+        keyboardInput.value = this.properties.value;
+        break;
+      case 'ArrowRight':
+        keyboardInput.selectionEnd += 1;
+        keyboardInput.selectionStart = keyboardInput.selectionEnd;
+        break;
+      case 'ArrowLeft':
+        keyboardInput.selectionEnd -= 1;
+        keyboardInput.selectionStart = keyboardInput.selectionEnd;
+        break;
+      case 'ArrowUp':
+        keyboardInput.selectionStart = 0;
+        keyboardInput.selectionEnd = 0;
+        break;
+      case 'ArrowDown':
+        keyboardInput.selectionStart += keyboardInput.value.length;
+        keyboardInput.selectionEnd = keyboardInput.selectionStart;
+        break;
+      case 'CapsLock':
+        this.toggleCapsLock();
+        break;
+      case 'Shift':
+        this.toggleShift();
+        break;
+      default:
+        this.properties.value += key;
+        keyboardInput.value = this.properties.value;
     }
   },
 
